@@ -2,7 +2,7 @@
  Aligning Binary Centers for Single-stage Monocular 3D Object Detection
 
 
-![image](https://github.com/fyancy/AlignBC/tree/main/abc_imgs/gif/move_long.gif)
+![image](https://github.com/fyancy/AlignBC/blob/main/abc_imgs/gif/move_crossing.gif)
 
 说明：
 https://github.com/ZhengYaWei1992/ZWProgressView/blob/master/Untitled3.gif
