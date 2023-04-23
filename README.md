@@ -31,8 +31,7 @@ Fig. Training and testing pipeline of the proposed method.
 We consider the 3D loss, 2D loss and alignment loss of the proposed model to minimize, as follows
 $$L_\text{ABC}=\sum_{i=1}^{2}\left(L_{i,\text{kpt}}\left ( I;\phi_f,\phi_i \right ) +L_{i,\text{3D}}\left ( I;\phi_f,\phi_i \right )+L_{i,\text{2D}}\left ( I;\phi_f,\phi_i \right )\right)+L_\text{dis}\left ( \phi_f(I);\phi_1, \phi_2 \right )\text{,}$$
 where $L_{i,\Box}$ denotes the loss item for the $i^\text{th}$ branch, and $\phi_f$ the parameterized backbone. For both branches, the keypoint classification loss $L_\text{kpt}$ is the penalty-reduced focal loss \cite{law2018cornernet}, $L_\text{3D}$ is the sum loss for 3D box components including dimensions ($L_\text{dim}$), location ($L_\text{loc}$) and orientation ($L_\text{ori}$), where $L_\text{dim}$ is the L1 loss for dimension regression, the orientation estimation error $L_\text{ori}$ is the MultiBin loss \cite{mousavian20173d} combined bin classification with angle regression, $L_\text{loc}$ contains the L1 loss for center offsets and the uncertainty-aware regression loss for object depth. And the disentangled box-matching loss $L_\text{dis}$, in which only the deteciton branches are updated iteratively, is given as
-$$\min_{\phi_1, \phi_2}\
-	\left \|\max\left(0, \big(\hat{\mathcal{B}}-\varepsilon\big)-\mathcal{B}_1\right)\right\|_1+
+$$\min_{\phi_1, \phi_2}\\left \|\max\left(0, \big(\hat{\mathcal{B}}-\varepsilon\big)-\mathcal{B}_1\right)\right\|_1+
 	\left \|\max\left(0, \mathcal{B}_2-\big(\hat{\mathcal{B}}+\varepsilon\big)\right)\right\|_1
 	+\frac{1}{n_\text{dis}}\sum_{j=1}^{n_\text{dis}}\left \| \mathcal{B}_1(\Omega_j,\hat{\Omega}-\hat{\Omega}_j)-
 	\mathcal{B}_2 (\Omega_j,\hat{\Omega}-\hat{\Omega}_j)\right \|_1
