@@ -26,15 +26,31 @@ Fig. Training and testing pipeline of the proposed method.
 </p>
 
 ### Training loss
+<p align="justify">
 We consider the 3D loss, 2D loss and alignment loss of the proposed model to minimize, as follows
 $$L_\text{ABC}=\sum_{i=1}^{2}\left(L_{i,\text{kpt}}\left ( I;\phi_f,\phi_i \right ) +L_{i,\text{3D}}\left ( I;\phi_f,\phi_i \right )+L_{i,\text{2D}}\left ( I;\phi_f,\phi_i \right )\right)+L_\text{dis}\left ( \phi_f(I);\phi_1, \phi_2 \right )\text{,}$$
-where $L_{i,\Box}$ denotes the loss item for the $i^\text{th}$ branch, and $\phi_f$ the parameterized backbone. For both branches, the keypoint classification loss $L_\text{kpt}$ is the penalty-reduced focal loss \cite{law2018cornernet}, $L_\text{3D}$ is the sum loss for 3D box components including dimensions ($L_\text{dim}$), location ($L_\text{loc}$) and orientation ($L_\text{ori}$), where $L_\text{dim}$ is the L1 loss for dimension regression, the orientation estimation error $L_\text{ori}$ is the MultiBin loss \cite{mousavian20173d} combined bin classification with angle regression, $L_\text{loc}$ contains the L1 loss for center offsets and the uncertainty-aware regression loss for object depth. And the disentangled box-matching loss $L_\text{dis}$, in which only the deteciton branches are updated iteratively, is given as
-$$\min_{\phi_1, \phi_2}\\left \|\max\left(0, \big(\hat{\mathcal{B}}-\varepsilon\big)-\mathcal{B}_1\right)\right\|_1+\left \|\max\left(0, \mathcal{B}_2-\big(\hat{\mathcal{B}}+\varepsilon\big)\right)\right\|_1+\frac{1}{n_\text{dis}}\sum_{j=1}^{n_\text{dis}}\left \| \mathcal{B}_1(\Omega_j,\hat{\Omega}-\hat{\Omega}_j)-\mathcal{B}_2 (\Omega_j,\hat{\Omega}-\hat{\Omega}_j)\right \|_1\text{,}$$
+where $L_{i,\Box}$ denotes the loss item for the $i^\text{th}$ branch, and $\phi_f$ the parameterized backbone. For both branches, the keypoint classification loss $L_\text{kpt}$ is the penalty-reduced focal loss \cite{law2018cornernet}, $L_\text{3D}$ is the sum loss for 3D box components including dimensions ($L_\text{dim}$), location ($L_\text{loc}$) and orientation ($L_\text{ori}$), where $L_\text{dim}$ is the L1 loss for dimension regression, the orientation estimation error $L_\text{ori}$ is the MultiBin loss combined bin classification with angle regression, $L_\text{loc}$ contains the L1 loss for center offsets and the uncertainty-aware regression loss for object depth. And the disentangled box-matching loss $L_\text{dis}$, in which only the deteciton branches are updated iteratively.
+</p>
 
+### Experimental setup
+<p align="justify">
+The proposed method is validated on the KITTI-3D dataset, the most widely used autonomous driving benchmark. The dataset contains 7481 training images and 7518 test images, including object categories such as cars, pedestrians and bicycles. The camera calibration information of all images is publicly available, and the image annotations of training images are also public. Therefore, we redivide the training set using two split methods $val_1$ ($N_\text{train}=3712,N_\text{val}=3769$) and $val_2$ ($N_\text{train}=3682,N_\text{val}=3799$) for discussions, following 3DOP and SubCNN, respectively. In our monocular experiments, the images from left camera are used and the Car category is focused.
+</p>
 
-
+ <p align="justify">
+The average precision (AP) of 3D bounding box ($\text{AP}_\text{3D}$) and average localization precision on BEV ($\text{AP}_\text{BEV}$) are used for evaluation metrics in all experiments. Considering KITTI dataset has assessed the detection difficulty of each object, we give the AP results under three difficulty classes (easy, moderate and hard). Earlier methods (prior to 2019) evaluated the model using $\text{AP}|\text{R}_{11}$, whereas more recent methods used the more reasonable $\text{AP}|\text{R}_{40}$. For fair comparison, we report both 11-point and 40-point AP results of our method when compared with other methods. In discussion, we only give the $\text{AP}|\text{R}_{40}$ results. We mainly focus on the detection performance on Car category and use $(0.7, 0.7, 0.7)$ as the default IoU thresholds for three difficulty levels in experiments.
+</p>
 
 ## Performance
+<p align="justify">
+We visualize the qualitative results on KITTI-3D dataset. The figure below shows the single-branch and double-branch detection results of the proposed method on $val_1$ set, where the three columns display the detection results generated from $b_1$ and $b_2$, and the aligned results, respectively.} We show the scenarios with truncated objects at the $1^\text{st}$ row, distant objects at the $2^\text{nd}$ row, occluded objects at the $1^\text{st}$ row. In addition, the post-processing can also filter inferior detections with low confidence (e.g. the $3^\text{rd}$ and $4^\text{th}$ row). This demonstrates that our method could significantly enhance the low-quality detection results through double branch structure.
+</p>
 
+<div align=center>
+<img src="abc_imgs/img/heads_detection.png" width="800">
+</div>
+<p align="justify">
+Fig. Qualitative results of the proposed method on KITTI-3D $val_1$ set. From left to right are the 3D detection result from $b_1$, $b_2$, and alignment. On the far right is a BEV.  
+</p>
 
 ## Citations
