@@ -1,5 +1,5 @@
 # AlignBC
- Aligning Binary Centers for Single-stage Monocular 3D Object Detection. This repository include the core codes of our method and some demos of monocular object detection based on [KITTI dataset](https://www.cvlibs.net/datasets/kitti/index.php).
+ Aligning Binary Centers for Single-stage Monocular 3D Object Detection. This repository include the core codes of our method and some demos of monocular object detection based on [KITTI dataset](https://www.cvlibs.net/datasets/kitti/index.php). Our work [ABC: Aligning binary centers for single-stage monocular 3D object detection](https://www.sciencedirect.com/science/article/pii/S0262885623001154?via%3Dihub) has been published on Image and Vision Computing.
  
  Here are two videos for object detection for moving objects (Cars). More can be found [here](https://github.com/fyancy/AlignBC/tree/main/abc_imgs/gif).
  - Detection for close Cars on narrow roads
@@ -53,4 +53,15 @@ We visualize the qualitative results on KITTI-3D dataset. The figure below shows
 Fig. Qualitative results of the proposed method on KITTI-3D $val_1$ set. From left to right are the 3D detection result from $b_1$, $b_2$, and alignment. On the far right is a BEV.  
 </p>
 
-## Citations
+## Citation
+```
+@article{feng2023abc,
+  title={ABC: Aligning binary centers for single-stage monocular 3D object detection},
+  author={Feng, Yong and Chen, Jinglong and He, Shuilong and Xu, Enyong},
+  journal={Image and Vision Computing},
+  pages={104741},
+  year={2023},
+  publisher={Elsevier}
+}
+```
+
